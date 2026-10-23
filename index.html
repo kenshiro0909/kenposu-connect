@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex">
-<title>ケンポスくん｜連携</title>
+<title>ケンポスくん</title>
 <style>
 :root{--ink:#18203A;--gold:#E7C27A;--bg:#ECEEF2;--sub:#5B6480}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;color:var(--ink);padding:16px}
@@ -19,7 +18,15 @@ h1{font-size:20px;margin:0 0 10px}p{margin:0;color:var(--sub);line-height:1.7;fo
 </style>
 </head>
 <body>
-<div class="card">
+<div class="card" id="landing" style="display:none;text-align:left">
+  <h1 style="text-align:center">ケンポスくん</h1>
+  <p>自分で作ったショート動画や投稿を、TikTok・Instagram・Threads・YouTubeへ、決めた時間に予約投稿できるダッシュボードです。</p>
+  <p class="small" style="margin-top:8px">A dashboard to schedule and publish your own short videos and posts to TikTok, Instagram, Threads and YouTube.</p>
+  <ul style="color:#5B6480;font-size:14px;line-height:1.8;padding-left:20px"><li>アカウントをつなぐ（TikTokでログインして許可） / Connect your account</li><li>動画を選んで、投稿文・公開範囲などを決める / Choose a video, caption and settings</li><li>決めた時間に自動で投稿、結果を表示 / Posts at your chosen time and shows the result</li></ul>
+  <p style="text-align:center;margin-top:16px"><a href="app.html" style="display:inline-block;background:#18203A;color:#fff;text-decoration:none;padding:10px 18px;border-radius:10px;font-weight:700">ダッシュボードを開く / Open dashboard</a></p>
+  <p class="small" style="text-align:center"><a href="terms.html" style="color:#9AA1B5">利用規約 / Terms of Service</a>　<a href="privacy.html" style="color:#9AA1B5">プライバシーポリシー / Privacy Policy</a></p>
+</div>
+<div class="card" id="relay">
   <div class="logo"><svg viewBox="0 0 80 80" width="64" height="64"><rect width="80" height="80" fill="#18203A"/><circle cx="40" cy="40" r="29" fill="none" stroke="#E7C27A" stroke-width="1.8"/><circle cx="40" cy="40" r="25.5" fill="none" stroke="#E7C27A" stroke-width=".7"/><text x="38.55" y="50" text-anchor="middle" font-size="27" font-weight="600" letter-spacing="-2.5" fill="#E7C27A" font-family="'Hiragino Mincho ProN','Yu Mincho',serif">KP</text></svg></div>
   <h1 id="t">連携しています…</h1>
   <p id="m">そのままお待ちください（数秒〜20秒ほど）</p>
@@ -36,6 +43,7 @@ h1{font-size:20px;margin:0 0 10px}p{margin:0;color:var(--sub);line-height:1.7;fo
     document.getElementById('m').textContent = msg;
     document.getElementById('s').textContent = ok ? 'このタブは閉じて大丈夫です。ケンポスくんの「連携」に追加されています。' : 'ケンポスくんの「連携」から、もう一度つないでみてください。';
   }
+  if (!q.code && !q.error) { document.getElementById('relay').style.display = 'none'; document.getElementById('landing').style.display = 'block'; return; }
   if (q.error) return show(false, '連携できませんでした', q.error_description || q.error);
   var parts = String(q.state || '').split('.');
   if (!q.code || parts.length < 4 || !/^[A-Za-z0-9_-]+$/.test(parts[3])) return show(false, '連携できませんでした', 'このページは、ケンポスくんの「つなぐ」から開いた時だけ使えます。');
